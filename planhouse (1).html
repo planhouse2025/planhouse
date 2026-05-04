@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan House Engineer & Architect | Dream Home Design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple: #6C3FC5;
+    --purple-dark: #4A2A8F;
+    --purple-light: #9B6FE8;
+    --purple-glow: rgba(108,63,197,0.25);
+    --black: #0A0A0F;
+    --dark: #12121A;
+    --card-bg: #1A1A28;
+    --white: #F8F8FF;
+    --gray: #8888AA;
+    --border: rgba(108,63,197,0.2);
+  }
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; }
+
+  /* ─── HEADER ─── */
+  header {
+    position: fixed; top:0; left:0; right:0; z-index:1000;
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 18px 5%;
+    background: rgba(10,10,15,0.88);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    transition: box-shadow 0.3s;
+  }
+  .logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
+  .logo-icon {
+    width:38px; height:38px;
+    background: linear-gradient(135deg, var(--purple), var(--purple-light));
+    border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:18px;
+  }
+  .logo-text { font-family:'Playfair Display', serif; font-size:1rem; color:var(--white); line-height:1.1; }
+  .logo-text span { display:block; font-size:0.62rem; font-family:'DM Sans', sans-serif; color:var(--gray); font-weight:400; letter-spacing:0.08em; text-transform:uppercase; }
+  nav { display:flex; gap:28px; }
+  nav a { color:var(--gray); text-decoration:none; font-size:0.88rem; font-weight:500; letter-spacing:0.03em; transition:color 0.2s; }
+  nav a:hover { color:var(--white); }
+  .header-cta {
+    background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+    color:#fff; border:none; padding:10px 22px; border-radius:6px;
+    font-size:0.85rem; font-weight:600; cursor:pointer; text-decoration:none; transition:all 0.2s;
+  }
+  .header-cta:hover { transform:translateY(-1px); box-shadow:0 4px 20px var(--purple-glow); }
+  .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; }
+  .hamburger span { display:block; width:24px; height:2px; background:var(--white); border-radius:2px; }
+
+  /* ─── HERO ─── */
+  #home {
+    min-height:100vh; display:flex; align-items:center; position:relative;
+    overflow:hidden; padding:120px 5% 80px;
+  }
+  .hero-bg {
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse 60% 60% at 70% 50%, rgba(108,63,197,0.15) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 50% at 15% 80%, rgba(108,63,197,0.08) 0%, transparent 60%),
+      linear-gradient(180deg, #0A0A0F 0%, #12121A 100%);
+  }
+  .hero-grid {
+    position:absolute; inset:0;
+    background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
+    opacity:0.35;
+  }
+  .hero-content { position:relative; z-index:2; max-width:600px; }
+  .hero-badge {
+    display:inline-flex; align-items:center; gap:8px;
+    background:rgba(108,63,197,0.12); border:1px solid var(--border);
+    color:var(--purple-light); font-size:0.74rem; font-weight:600; letter-spacing:0.1em;
+    text-transform:uppercase; padding:7px 14px; border-radius:100px; margin-bottom:28px;
+    animation: fadeUp 0.6s ease both;
+  }
+  h1 {
+    font-family:'Playfair Display', serif;
+    font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+    font-weight:900; line-height:1.1; margin-bottom:22px;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  h1 em { font-style:normal; color:var(--purple-light); }
+  .hero-sub { color:var(--gray); font-size:1rem; line-height:1.7; margin-bottom:38px; max-width:480px; animation:fadeUp 0.6s 0.2s ease both; }
+  .hero-btns { display:flex; gap:14px; flex-wrap:wrap; animation:fadeUp 0.6s 0.3s ease both; }
+  .btn-primary {
+    background:linear-gradient(135deg, var(--purple), var(--purple-dark));
+    color:#fff; border:none; padding:14px 30px; border-radius:8px;
+    font-family:'DM Sans',sans-serif; font-size:0.92rem; font-weight:600;
+    cursor:pointer; text-decoration:none; transition:all 0.25s; display:inline-block;
+    box-shadow:0 0 24px var(--purple-glow);
+  }
+  .btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 36px rgba(108,63,197,0.4); }
+  .btn-outline {
+    background:transparent; color:var(--white); border:1px solid var(--border);
+    padding:14px 30px; border-radius:8px; font-family:'DM Sans',sans-serif; font-size:0.92rem; font-weight:500;
+    cursor:pointer; text-decoration:none; transition:all 0.25s; display:inline-block;
+  }
+  .btn-outline:hover { border-color:var(--purple-light); color:var(--purple-light); }
+  .hero-stats {
+    display:flex; gap:40px; margin-top:52px; padding-top:36px; border-top:1px solid var(--border);
+    animation:fadeUp 0.6s 0.4s ease both; flex-wrap:wrap;
+  }
+  .stat-num { font-family:'Playfair Display',serif; font-size:2rem; font-weight:900; color:var(--white); display:block; line-height:1; }
+  .stat-label { font-size:0.75rem; color:var(--gray); margin-top:4px; letter-spacing:0.04em; }
+  .hero-img-wrap {
+    position:absolute; right:0; top:0; width:46%; height:100%;
+    animation:fadeLeft 0.9s 0.3s ease both;
+    pointer-events:none;
+  }
+  .hero-img-wrap img {
+    width:100%; height:100%; object-fit:cover; opacity:0.5;
+    mask-image:linear-gradient(to left, black 40%, transparent 100%);
+  }
+
+  /* ─── TRUST ─── */
+  .trust-bar {
+    background:var(--dark); border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+    padding:18px 5%; display:flex; align-items:center; justify-content:center;
+    gap:44px; flex-wrap:wrap; position:relative; z-index:2;
+  }
+  .trust-item { display:flex; align-items:center; gap:9px; color:var(--gray); font-size:0.86rem; font-weight:500; }
+  .trust-item strong { color:var(--white); }
+
+  /* ─── SECTIONS ─── */
+  section { padding:90px 5%; position:relative; z-index:1; }
+  .section-label { font-size:0.7rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--purple-light); margin-bottom:10px; }
+  .section-title { font-family:'Playfair Display',serif; font-size:clamp(1.7rem,3vw,2.6rem); font-weight:900; line-height:1.15; margin-bottom:14px; }
+  .section-sub { color:var(--gray); font-size:0.95rem; line-height:1.7; max-width:500px; margin-bottom:46px; }
+
+  /* ─── STORE ─── */
+  #store { background:var(--dark); }
+  .store-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(275px, 1fr)); gap:22px; }
+  .plan-card {
+    background:var(--card-bg); border:1px solid var(--border); border-radius:14px;
+    overflow:hidden; transition:all 0.3s; cursor:default;
+  }
+  .plan-card:hover { transform:translateY(-5px); border-color:var(--purple); box-shadow:0 16px 50px rgba(108,63,197,0.18); }
+  .plan-img {
+    width:100%; height:185px; display:flex; align-items:center; justify-content:center;
+    font-size:3.5rem; position:relative; overflow:hidden;
+  }
+  .plan-img::after {
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(to bottom, transparent 50%, rgba(10,10,15,0.7) 100%);
+  }
+  .plan-hot {
+    position:absolute; top:12px; right:12px; z-index:2;
+    background:var(--purple); color:#fff; font-size:0.65rem; font-weight:700;
+    padding:3px 10px; border-radius:100px; letter-spacing:0.06em; text-transform:uppercase;
+  }
+  .plan-body { padding:16px 18px 20px; }
+  .plan-size { font-size:0.72rem; color:var(--gray); font-weight:500; letter-spacing:0.05em; margin-bottom:5px; text-transform:uppercase; }
+  .plan-name { font-family:'Playfair Display',serif; font-size:1.05rem; font-weight:700; margin-bottom:10px; }
+  .plan-tags { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px; }
+  .plan-tag { font-size:0.68rem; padding:3px 9px; border-radius:100px; border:1px solid var(--border); color:var(--gray); }
+  .plan-footer { display:flex; align-items:center; justify-content:space-between; padding-top:12px; border-top:1px solid var(--border); }
+  .plan-price { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:900; color:var(--purple-light); }
+  .plan-price small { font-family:'DM Sans',sans-serif; font-size:0.68rem; color:var(--gray); }
+  .buy-btn {
+    background:linear-gradient(135deg, var(--purple), var(--purple-dark));
+    color:#fff; border:none; padding:9px 18px; border-radius:6px;
+    font-family:'DM Sans',sans-serif; font-size:0.78rem; font-weight:600; cursor:pointer; transition:all 0.2s;
+  }
+  .buy-btn:hover { transform:translateY(-1px); box-shadow:0 4px 16px var(--purple-glow); }
+
+  /* ─── SERVICES ─── */
+  #services { background:var(--black); }
+  .services-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(270px, 1fr)); gap:22px; }
+  .svc-card {
+    background:var(--card-bg); border:1px solid var(--border); border-radius:16px;
+    padding:34px 28px; position:relative; overflow:hidden; transition:all 0.3s;
+  }
+  .svc-card:hover { border-color:var(--purple); transform:translateY(-4px); }
+  .svc-card.featured { background:linear-gradient(135deg,rgba(108,63,197,0.18),rgba(74,42,143,0.12)); border-color:var(--purple); }
+  .svc-card.featured::before {
+    content:'Most Popular'; position:absolute; top:0; right:22px;
+    background:var(--purple); color:#fff; font-size:0.62rem; font-weight:700;
+    letter-spacing:0.1em; text-transform:uppercase; padding:5px 12px; border-radius:0 0 8px 8px;
+  }
+  .svc-icon { font-size:2rem; margin-bottom:16px; display:block; }
+  .svc-tier { font-size:0.68rem; color:var(--purple-light); font-weight:700; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:6px; }
+  .svc-name { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:700; margin-bottom:10px; }
+  .svc-desc { color:var(--gray); font-size:0.84rem; line-height:1.6; margin-bottom:20px; }
+  .svc-list { list-style:none; margin-bottom:26px; }
+  .svc-list li { font-size:0.82rem; color:var(--gray); padding:7px 0; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:9px; }
+  .svc-list li::before { content:'✓'; color:var(--purple-light); font-weight:700; flex-shrink:0; }
+  .svc-price { font-family:'Playfair Display',serif; font-size:1.55rem; font-weight:900; margin-bottom:18px; }
+  .svc-price small { font-family:'DM Sans',sans-serif; font-size:0.72rem; color:var(--gray); display:block; }
+
+  /* ─── PORTFOLIO ─── */
+  #portfolio { background:var(--dark); }
+  .port-grid { display:grid; grid-template-columns:repeat(12,1fr); gap:14px; }
+  .port-item {
+    background:var(--card-bg); border:1px solid var(--border); border-radius:12px;
+    overflow:hidden; position:relative; transition:all 0.3s; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; font-size:3rem;
+  }
+  .port-item:hover { border-color:var(--purple); }
+  .port-item:hover .port-ov { opacity:1; }
+  .port-ov {
+    position:absolute; inset:0; background:rgba(108,63,197,0.88);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:5px; opacity:0; transition:opacity 0.3s;
+  }
+  .port-ov span { color:#fff; font-weight:700; font-size:0.88rem; }
+  .port-ov small { color:rgba(255,255,255,0.7); font-size:0.72rem; }
+  .pi1{grid-column:span 7;height:270px;}
+  .pi2{grid-column:span 5;height:270px;}
+  .pi3{grid-column:span 4;height:230px;}
+  .pi4{grid-column:span 5;height:230px;}
+  .pi5{grid-column:span 3;height:230px;}
+  .pi6{grid-column:span 6;height:210px;}
+  .pi7{grid-column:span 6;height:210px;}
+
+  /* ─── CONTACT ─── */
+  #contact { background:var(--black); }
+  .contact-wrap { display:grid; grid-template-columns:1fr 1.1fr; gap:52px; align-items:start; }
+  .c-detail {
+    display:flex; align-items:flex-start; gap:13px; margin-bottom:16px;
+    padding:18px; background:var(--card-bg); border:1px solid var(--border); border-radius:12px; transition:all 0.2s;
+  }
+  .c-detail:hover { border-color:var(--purple); }
+  .c-icon { font-size:1.3rem; flex-shrink:0; padding-top:2px; }
+  .c-label { font-size:0.68rem; color:var(--gray); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:3px; }
+  .c-val { font-weight:600; color:var(--white); font-size:0.92rem; }
+  .c-form { background:var(--card-bg); border:1px solid var(--border); border-radius:16px; padding:34px; }
+  .c-form h3 { font-family:'Playfair Display',serif; font-size:1.3rem; margin-bottom:22px; }
+  .fg { margin-bottom:16px; }
+  .fg label { display:block; font-size:0.74rem; color:var(--gray); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.06em; }
+  .fg input, .fg textarea, .fg select {
+    width:100%; background:rgba(255,255,255,0.04); border:1px solid var(--border);
+    border-radius:8px; padding:12px 15px; color:var(--white);
+    font-family:'DM Sans',sans-serif; font-size:0.88rem; outline:none; transition:border-color 0.2s;
+  }
+  .fg input:focus, .fg textarea:focus, .fg select:focus { border-color:var(--purple); }
+  .fg textarea { resize:vertical; min-height:100px; }
+  .fg select option { background:var(--dark); }
+
+  /* ─── FOOTER ─── */
+  footer { background:var(--dark); border-top:1px solid var(--border); padding:55px 5% 28px; }
+  .f-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:44px; margin-bottom:44px; }
+  .f-brand p { color:var(--gray); font-size:0.83rem; line-height:1.7; max-width:250px; margin-top:12px; }
+  .f-col h4 { font-family:'Playfair Display',serif; font-size:0.98rem; font-weight:700; margin-bottom:14px; }
+  .f-col ul { list-style:none; }
+  .f-col ul li { margin-bottom:9px; }
+  .f-col ul li a { color:var(--gray); text-decoration:none; font-size:0.83rem; transition:color 0.2s; }
+  .f-col ul li a:hover { color:var(--purple-light); }
+  .f-bottom { border-top:1px solid var(--border); padding-top:22px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+  .f-bottom p { color:var(--gray); font-size:0.78rem; }
+  .accent { color:var(--purple-light); }
+
+  /* ─── WA FLOAT ─── */
+  .wa-float {
+    position:fixed; bottom:26px; right:26px; z-index:999;
+    width:56px; height:56px; border-radius:50%;
+    background:linear-gradient(135deg,#25D366,#128C7E);
+    display:flex; align-items:center; justify-content:center; font-size:1.5rem;
+    text-decoration:none; box-shadow:0 6px 26px rgba(37,211,102,0.35);
+    animation:float 3s ease-in-out infinite; transition:transform 0.2s;
+  }
+  .wa-float:hover { transform:scale(1.1) !important; }
+
+  /* ─── MODAL ─── */
+  .modal-overlay {
+    position:fixed; inset:0; background:rgba(0,0,0,0.87); z-index:9999;
+    display:none; align-items:center; justify-content:center; padding:20px;
+  }
+  .modal-overlay.active { display:flex; }
+  .modal {
+    background:var(--card-bg); border:1px solid var(--border); border-radius:18px;
+    padding:34px; max-width:430px; width:100%; position:relative;
+    animation:fadeUp 0.3s ease;
+  }
+  .m-close { position:absolute; top:14px; right:16px; background:none; border:none; color:var(--gray); font-size:1.2rem; cursor:pointer; transition:color 0.2s; }
+  .m-close:hover { color:var(--white); }
+  .modal h3 { font-family:'Playfair Display',serif; font-size:1.35rem; margin-bottom:6px; }
+  .modal .m-plan { color:var(--purple-light); font-weight:600; font-size:0.95rem; margin-bottom:10px; }
+  .modal .m-desc { color:var(--gray); font-size:0.84rem; line-height:1.6; margin-bottom:18px; }
+  .bkash-box {
+    background:rgba(229,27,88,0.1); border:1px solid rgba(229,27,88,0.3);
+    border-radius:10px; padding:16px; margin-bottom:16px;
+  }
+  .bkash-box .bl { font-size:0.67rem; color:#e51b58; text-transform:uppercase; letter-spacing:0.1em; font-weight:700; margin-bottom:5px; }
+  .bkash-box .bn { font-family:'Playfair Display',serif; font-size:1.5rem; color:#fff; }
+  .bkash-box .bt { font-size:0.72rem; color:var(--gray); margin-top:3px; }
+  .m-amount {
+    background:rgba(108,63,197,0.1); border:1px solid var(--border);
+    border-radius:8px; padding:12px 16px; margin-bottom:18px;
+    font-family:'Playfair Display',serif; font-size:1.25rem; color:var(--purple-light); text-align:center;
+  }
+  .m-steps { margin-bottom:22px; }
+  .m-step { display:flex; gap:11px; align-items:flex-start; margin-bottom:10px; }
+  .m-sn { width:22px; height:22px; border-radius:50%; background:var(--purple); color:#fff; font-size:0.72rem; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .m-st { font-size:0.82rem; color:var(--gray); line-height:1.5; padding-top:2px; }
+  .m-confirm { width:100%; background:linear-gradient(135deg,var(--purple),var(--purple-dark)); color:#fff; border:none; padding:14px; border-radius:8px; font-family:'DM Sans',sans-serif; font-size:0.92rem; font-weight:700; cursor:pointer; transition:all 0.2s; margin-bottom:10px; }
+  .m-confirm:hover { box-shadow:0 6px 26px var(--purple-glow); }
+  .m-drive { display:none; text-align:center; padding:14px; background:rgba(108,63,197,0.1); border:1px solid var(--border); border-radius:10px; font-size:0.85rem; color:var(--purple-light); }
+  .m-drive a { color:var(--purple-light); font-weight:600; }
+
+  /* ─── ANIM ─── */
+  @keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeLeft { from{opacity:0;transform:translateX(35px)} to{opacity:1;transform:translateX(0)} }
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
+  .reveal { opacity:0; transform:translateY(26px); transition:opacity 0.55s ease, transform 0.55s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+
+  /* ─── MOBILE ─── */
+  @media(max-width:920px) {
+    nav,header .header-cta{display:none;}
+    .hamburger{display:flex;}
+    .hero-img-wrap{display:none;}
+    .contact-wrap{grid-template-columns:1fr;}
+    .f-grid{grid-template-columns:1fr 1fr;}
+    .port-grid{grid-template-columns:1fr 1fr;}
+    .pi1,.pi2,.pi3,.pi4,.pi5,.pi6,.pi7{grid-column:span 1;height:180px;}
+  }
+  @media(max-width:580px) {
+    .hero-stats{gap:22px;}
+    .trust-bar{gap:18px;}
+    .f-grid{grid-template-columns:1fr;}
+    .port-grid{grid-template-columns:1fr;}
+    section{padding:70px 5%;}
+  }
+  .mob-nav {
+    display:none; position:fixed; inset:0; top:72px;
+    background:rgba(10,10,15,0.97); backdrop-filter:blur(20px);
+    z-index:900; flex-direction:column; align-items:center; justify-content:center; gap:34px;
+  }
+  .mob-nav.open{display:flex;}
+  .mob-nav a{font-size:1.4rem;color:var(--white);text-decoration:none;font-weight:600;}
+  .mob-nav .mob-cta{background:linear-gradient(135deg,var(--purple),var(--purple-dark));padding:14px 36px;border-radius:8px;font-size:1rem;}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="hdr">
+  <a href="#home" class="logo">
+    <div class="logo-icon">🏠</div>
+    <div class="logo-text">Plan House<span>Engineer & Architect</span></div>
+  </a>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#store">Plans</a>
+    <a href="#services">Services</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <a href="#store" class="header-cta">Buy Plans →</a>
+  <button class="hamburger" onclick="toggleMob()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<nav class="mob-nav" id="mobNav">
+  <a href="#home" onclick="toggleMob()">Home</a>
+  <a href="#store" onclick="toggleMob()">House Plans</a>
+  <a href="#services" onclick="toggleMob()">Services</a>
+  <a href="#portfolio" onclick="toggleMob()">Portfolio</a>
+  <a href="#contact" onclick="toggleMob()">Contact</a>
+  <a href="#store" class="mob-cta" onclick="toggleMob()">Buy Plans →</a>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">✦ Bangladesh's Premier Architecture Studio</div>
+    <h1>Download Your <em>Dream House Plan</em> Instantly</h1>
+    <p class="hero-sub">আপনার স্বপ্নের বাড়ির নকশা এখন মাত্র কয়েক মিনিটেই পেয়ে যান। Professional 2D/3D plans, ready to build today.</p>
+    <div class="hero-btns">
+      <a href="#store" class="btn-primary">🏠 View All Plans</a>
+      <a href="#contact" class="btn-outline">Free Consultation →</a>
+    </div>
+    <div class="hero-stats">
+      <div><span class="stat-num">100+</span><div class="stat-label">Ready Designs</div></div>
+      <div><span class="stat-num">10+</span><div class="stat-label">Years Experience</div></div>
+      <div><span class="stat-num">500+</span><div class="stat-label">Happy Clients</div></div>
+    </div>
+  </div>
+  <div class="hero-img-wrap">
+    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=80" alt="Modern House">
+  </div>
+</section>
+
+<!-- TRUST -->
+<div class="trust-bar">
+  <div class="trust-item">✅ <strong>100%</strong>&nbsp;Original Designs</div>
+  <div class="trust-item">⚡ Instant&nbsp;<strong>Download</strong></div>
+  <div class="trust-item">📐 <strong>AutoCAD</strong>&nbsp;Format</div>
+  <div class="trust-item">💬 Free&nbsp;<strong>Support</strong></div>
+  <div class="trust-item">🔒 Secure&nbsp;<strong>bKash</strong>&nbsp;Payment</div>
+</div>
+
+<!-- STORE -->
+<section id="store">
+  <div class="section-label reveal">House Plan Store</div>
+  <h2 class="section-title reveal">Ready-Made House Plans</h2>
+  <p class="section-sub reveal">সব ধরনের বাজেট ও জমির মাপের জন্য প্রফেশনাল হাউস প্ল্যান। বিকাশে পেমেন্ট করুন, সঙ্গে সঙ্গে ডাউনলোড করুন।</p>
+  <div class="store-grid">
+
+    <div class="plan-card reveal">
+      <div class="plan-img" style="background:linear-gradient(135deg,#1a1a35,#2d2450);">🏡<div class="plan-hot">HOT</div></div>
+      <div class="plan-body">
+        <div class="plan-size">📐 30 × 45 ft</div>
+        <div class="plan-name">Modern Duplex Villa</div>
+        <div class="plan-tags"><span class="plan-tag">3 Bed</span><span class="plan-tag">2 Bath</span><span class="plan-tag">2D+3D</span></div>
+        <div class="plan-footer">
+          <div class="plan-price">৳5,000 <small>BDT</small></div>
+          <button class="buy-btn" onclick="openModal('Modern Duplex Villa — 30×45 ft',5000)">Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="plan-card reveal">
+      <div class="plan-img" style="background:linear-gradient(135deg,#1e2a1a,#2a3d20);">🏘️</div>
+      <div class="plan-body">
+        <div class="plan-size">📐 20 × 40 ft</div>
+        <div class="plan-name">Compact Urban Home</div>
+        <div class="plan-tags"><span class="plan-tag">2 Bed</span><span class="plan-tag">1 Bath</span><span class="plan-tag">2D Plan</span></div>
+        <div class="plan-footer">
+          <div class="plan-price">৳3,500 <small>BDT</small></div>
+          <button class="buy-btn" onclick="openModal('Compact Urban Home — 20×40 ft',3500)">Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="plan-card reveal">
+      <div class="plan-img" style="background:linear-gradient(135deg,#2a1a35,#401d50);">🏰<div class="plan-hot">NEW</div></div>
+      <div class="plan-body">
+        <div class="plan-size">📐 40 × 60 ft</div>
+        <div class="plan-name">Luxury Family Mansion</div>
+        <div class="plan-tags"><span class="plan-tag">5 Bed</span><span class="plan-tag">4 Bath</span><span class="plan-tag">3D+Estimate</span></div>
+        <div class="plan-footer">
+          <div class="plan-price">৳12,000 <small>BDT</small></div>
+          <button class="buy-btn" onclick="openModal('Luxury Family Mansion — 40×60 ft',12000)">Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="plan-card reveal">
+      <div class="plan-img" style="background:linear-gradient(135deg,#1a2030,#1d3045);">🏗️</div>
+      <div class="plan-body">
+        <div class="plan-size">📐 25 × 50 ft</div>
+        <div class="plan-name">Classic Bungalow</div>
+        <div class="plan-tags"><span class="plan-tag">3 Bed</span><span class="plan-tag">2 Bath</span><span class="plan-tag">2D Plan</span></div>
+        <div class="plan-footer">
+          <div class="plan-price">৳4,000 <small>BDT</small></div>
+          <button class="buy-btn" onclick="openModal('Classic Bungalow — 25×50 ft',4000)">Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="plan-card reveal">
+      <div class="plan-img" style="background:linear-gradient(135deg,#2a1e1a,#453020);">🏠<div class="plan-hot">SALE</div></div>
+      <div class="plan-body">
+        <div class="plan-size">📐 30 × 55 ft</div>
+        <div class="plan-name">Contemporary Two-Story</div>
+        <div class="plan-tags"><span class="plan-tag">4 Bed</span><span class="plan-tag">3 Bath</span><span class="plan-tag">2D+3D</span></div>
+        <div class="plan-footer">
+          <div class="plan-price">৳7,500 <small>BDT</small></div>
+          <button class="buy-btn" onclick="openModal('Contemporary Two-Story — 30×55 ft',7500)">Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="plan-card reveal">
+      <div class="plan-img" style="background:linear-gradient(135deg,#1a2820,#204030);">🌿</div>
+      <div class="plan-body">
+        <div class="plan-size">📐 35 × 50 ft</div>
+        <div class="plan-name">Eco Green Residence</div>
+        <div class="plan-tags"><span class="plan-tag">4 Bed</span><span class="plan-tag">3 Bath</span><span class="plan-tag">3D+Estimate</span></div>
+        <div class="plan-footer">
+          <div class="plan-price">৳9,000 <small>BDT</small></div>
+          <button class="buy-btn" onclick="openModal('Eco Green Residence — 35×50 ft',9000)">Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-label reveal">Our Packages</div>
+  <h2 class="section-title reveal">Design Service Packages</h2>
+  <p class="section-sub reveal">আপনার প্রয়োজন ও বাজেট অনুযায়ী প্যাকেজ বেছে নিন। সব প্যাকেজে আমাদের বিশেষজ্ঞ টিম সাপোর্ট দেবে।</p>
+  <div class="services-grid">
+
+    <div class="svc-card reveal">
+      <span class="svc-icon">📐</span>
+      <div class="svc-tier">Basic Package</div>
+      <div class="svc-name">2D Floor Plan</div>
+      <div class="svc-desc">নতুন বাড়ির জন্য সম্পূর্ণ ২ডি ফ্লোর প্ল্যান — AutoCAD ফরম্যাটে ডেলিভারি।</div>
+      <ul class="svc-list">
+        <li>Complete 2D Floor Plan</li>
+        <li>AutoCAD (.dwg) File</li>
+        <li>PDF Export Included</li>
+        <li>1 Free Revision</li>
+      </ul>
+      <div class="svc-price">৳8,000 <small>Starting from</small></div>
+      <a href="#contact" class="btn-primary" style="display:block;text-align:center;">Get Started</a>
+    </div>
+
+    <div class="svc-card featured reveal">
+      <span class="svc-icon">🏗️</span>
+      <div class="svc-tier">Standard Package</div>
+      <div class="svc-name">2D + 3D Design</div>
+      <div class="svc-desc">২ডি প্ল্যানের সাথে সম্পূর্ণ ৩ডি ভিজ্যুয়ালাইজেশন — বানানোর আগেই দেখুন কেমন হবে।</div>
+      <ul class="svc-list">
+        <li>Complete 2D Floor Plan</li>
+        <li>3D Exterior & Interior Views</li>
+        <li>AutoCAD + Revit Files</li>
+        <li>3 Free Revisions</li>
+        <li>WhatsApp Support</li>
+      </ul>
+      <div class="svc-price">৳18,000 <small>Starting from</small></div>
+      <a href="#contact" class="btn-primary" style="display:block;text-align:center;">Get Started</a>
+    </div>
+
+    <div class="svc-card reveal">
+      <span class="svc-icon">🏆</span>
+      <div class="svc-tier">Premium Package</div>
+      <div class="svc-name">Full Design + Estimate</div>
+      <div class="svc-desc">সম্পূর্ণ স্থাপত্য সেবা — ডিজাইন থেকে নির্মাণ ব্যয়ের হিসাব পর্যন্ত সব কিছু।</div>
+      <ul class="svc-list">
+        <li>Full 2D + 3D Design</li>
+        <li>Structural Drawing</li>
+        <li>BOQ Cost Estimation</li>
+        <li>Electrical & Plumbing Layout</li>
+        <li>Unlimited Revisions</li>
+        <li>Priority Phone Support</li>
+      </ul>
+      <div class="svc-price">৳35,000 <small>Starting from</small></div>
+      <a href="#contact" class="btn-primary" style="display:block;text-align:center;">Get Started</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="section-label reveal">Our Work</div>
+  <h2 class="section-title reveal">Portfolio</h2>
+  <p class="section-sub reveal">আমাদের সম্পন্ন প্রজেক্টগুলো দেখুন। প্রতিটি ডিজাইন ক্লায়েন্টের চাহিদা ও রুচি অনুযায়ী তৈরি।</p>
+  <div class="port-grid">
+    <div class="port-item pi1 reveal" style="background:linear-gradient(135deg,#1a1a35,#2d2450);">🏰<div class="port-ov"><span>Luxury Villa</span><small>Dhaka, 2024</small></div></div>
+    <div class="port-item pi2 reveal" style="background:linear-gradient(135deg,#1e2a1a,#2a3d20);">🌿<div class="port-ov"><span>Eco Residence</span><small>Gazipur, 2024</small></div></div>
+    <div class="port-item pi3 reveal" style="background:linear-gradient(135deg,#2a1a35,#401d50);">🏠<div class="port-ov"><span>Modern Duplex</span><small>Chittagong, 2023</small></div></div>
+    <div class="port-item pi4 reveal" style="background:linear-gradient(135deg,#1a2030,#1d3045);">🏘️<div class="port-ov"><span>Apartment Block</span><small>Sylhet, 2023</small></div></div>
+    <div class="port-item pi5 reveal" style="background:linear-gradient(135deg,#2a1e1a,#453020);">🏡<div class="port-ov"><span>Bungalow</span><small>Dhaka, 2023</small></div></div>
+    <div class="port-item pi6 reveal" style="background:linear-gradient(135deg,#1a2820,#204030);">🏗️<div class="port-ov"><span>Commercial</span><small>Narayanganj, 2024</small></div></div>
+    <div class="port-item pi7 reveal" style="background:linear-gradient(135deg,#20181a,#352028);">🌆<div class="port-ov"><span>Mixed-Use</span><small>Dhaka, 2024</small></div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label reveal">Get In Touch</div>
+  <h2 class="section-title reveal">Contact Us</h2>
+  <p class="section-sub reveal">আজই আমাদের সাথে যোগাযোগ করুন এবং আপনার স্বপ্নের বাড়ি তৈরির প্রথম পদক্ষেপ নিন।</p>
+  <div class="contact-wrap">
+    <div class="reveal">
+      <div class="c-detail">
+        <div class="c-icon">📞</div>
+        <div><div class="c-label">Phone / WhatsApp</div><div class="c-val"><a href="tel:+8801712351909" style="color:inherit;text-decoration:none;">01712351909</a></div></div>
+      </div>
+      <div class="c-detail">
+        <div class="c-icon">📍</div>
+        <div><div class="c-label">Office Address</div><div class="c-val">Nikunjo-2, Khilkhet, Dhaka</div></div>
+      </div>
+      <div class="c-detail">
+        <div class="c-icon">🕐</div>
+        <div><div class="c-label">Working Hours</div><div class="c-val">Saturday – Thursday: 9AM – 7PM</div></div>
+      </div>
+      <div class="c-detail">
+        <div class="c-icon">💳</div>
+        <div><div class="c-label">bKash Payment Number</div><div class="c-val">01712351909</div></div>
+      </div>
+      <a href="https://wa.me/8801712351909" target="_blank" class="btn-primary" style="display:inline-flex;align-items:center;gap:10px;margin-top:8px;text-decoration:none;">
+        💬 Chat on WhatsApp
+      </a>
+    </div>
+    <div class="c-form reveal">
+      <h3>Send a Message</h3>
+      <div class="fg"><label>Your Name</label><input type="text" placeholder="আপনার নাম লিখুন"></div>
+      <div class="fg"><label>Phone Number</label><input type="tel" placeholder="01XXXXXXXXX"></div>
+      <div class="fg">
+        <label>Service Needed</label>
+        <select>
+          <option>Ready-Made House Plan</option>
+          <option>Basic – 2D Plan</option>
+          <option>Standard – 2D + 3D</option>
+          <option>Premium – Full Design + Estimate</option>
+        </select>
+      </div>
+      <div class="fg"><label>Message</label><textarea placeholder="আপনার জমির মাপ, প্রয়োজনীয়তা বা যেকোনো প্রশ্ন লিখুন..."></textarea></div>
+      <button class="btn-primary" style="width:100%;padding:14px;" onclick="alert('✅ আপনার বার্তা পাঠানো হয়েছে! আমরা শীঘ্রই যোগাযোগ করব।')">Send Message →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-grid">
+    <div class="f-brand">
+      <a href="#home" class="logo">
+        <div class="logo-icon">🏠</div>
+        <div class="logo-text">Plan House<span>Engineer & Architect</span></div>
+      </a>
+      <p>Bangladesh's trusted architecture firm. Delivering professional house plans and design services since 2014.</p>
+    </div>
+    <div class="f-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#store">House Plans</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">2D Floor Plan</a></li>
+        <li><a href="#services">3D Visualization</a></li>
+        <li><a href="#services">Full Architecture</a></li>
+        <li><a href="#services">Cost Estimation</a></li>
+        <li><a href="#services">Structural Design</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:+8801712351909">📞 01712351909</a></li>
+        <li><a href="https://wa.me/8801712351909" target="_blank">💬 WhatsApp</a></li>
+        <li><a href="#">📍 Nikunjo-2, Khilkhet</a></li>
+        <li><a href="#">Dhaka, Bangladesh</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="f-bottom">
+    <p>© 2025 <span class="accent">Plan House Engineer & Architect</span>. All rights reserved.</p>
+    <p>Designed with ❤️ in Dhaka, Bangladesh</p>
+  </div>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/8801712351909" class="wa-float" target="_blank" title="Chat on WhatsApp">💬</a>
+
+<!-- PAYMENT MODAL -->
+<div class="modal-overlay" id="payModal">
+  <div class="modal">
+    <button class="m-close" onclick="closeModal()">✕</button>
+    <h3>🏠 Purchase Plan</h3>
+    <div class="m-plan" id="mPlanName"></div>
+    <div class="m-desc">নিচের বিকাশ নম্বরে পেমেন্ট করুন এবং ট্রানজেকশন আইডি দিয়ে WhatsApp করুন।</div>
+    <div class="bkash-box">
+      <div class="bl">🔴 bKash Payment Number</div>
+      <div class="bn">01712-351909</div>
+      <div class="bt">Personal / Send Money</div>
+    </div>
+    <div class="m-amount" id="mAmount"></div>
+    <div class="m-steps">
+      <div class="m-step"><div class="m-sn">1</div><div class="m-st">বিকাশ অ্যাপ → Send Money → নম্বর <strong>01712351909</strong></div></div>
+      <div class="m-step"><div class="m-sn">2</div><div class="m-st">সঠিক পরিমাণ পাঠান, Transaction ID নোট করুন</div></div>
+      <div class="m-step"><div class="m-sn">3</div><div class="m-st">WhatsApp করুন <strong>01712351909</strong>-এ TxID সহ</div></div>
+      <div class="m-step"><div class="m-sn">4</div><div class="m-st">Confirm হলেই Google Drive ডাউনলোড লিংক পাবেন</div></div>
+    </div>
+    <button class="m-confirm" onclick="showDrive()">✅ Payment Done — Get Download Link</button>
+    <div class="m-drive" id="mDrive">
+      🎉 Verified! Download your plan now:<br>
+      <a href="https://drive.google.com" target="_blank">→ Open Google Drive Download Link</a><br>
+      <small style="color:var(--gray);margin-top:6px;display:block;">সমস্যা হলে WhatsApp করুন: 01712351909</small>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Sticky header
+  window.addEventListener('scroll', () => {
+    document.getElementById('hdr').style.boxShadow = scrollY > 30 ? '0 4px 30px rgba(0,0,0,0.5)' : 'none';
+  });
+
+  // Mobile nav
+  function toggleMob() { document.getElementById('mobNav').classList.toggle('open'); }
+
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 70);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
+
+  // Modal
+  function openModal(name, price) {
+    document.getElementById('mPlanName').textContent = name;
+    document.getElementById('mAmount').textContent = '৳' + price.toLocaleString() + ' BDT';
+    document.getElementById('mDrive').style.display = 'none';
+    document.getElementById('payModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.getElementById('payModal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  function showDrive() { document.getElementById('mDrive').style.display = 'block'; }
+  document.getElementById('payModal').addEventListener('click', e => { if (e.target === document.getElementById('payModal')) closeModal(); });
+</script>
+</body>
+</html>
